@@ -11,8 +11,8 @@ const Header = () => {
 export default Header;
 
 const StyledHeader = styled.header`
-  background-color: #333;
+  background-color: ${(props) => props.theme.color.background};
   h1 {
-    color: wheat;
+    color: ${(props) => props.theme.color.primary};
   }
 `;
