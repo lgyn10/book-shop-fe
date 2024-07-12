@@ -1,16 +1,15 @@
-import { ThemeProvider } from 'styled-components';
+import ThemeSwitcher from './components/header/ThemeSwitcher';
 import Layout from './components/layout/Layout';
+import { BookStoreThemeProvider } from './context/themeContext';
 import Home from './pages/Home';
-import { GlobalStyle } from './style/global';
-import { light } from './style/theme';
 
 function App() {
   return (
     <>
-      <ThemeProvider theme={light}>
-        <GlobalStyle themeName='light' />
+      <BookStoreThemeProvider>
+        <ThemeSwitcher />
         <Layout children={<Home />} />
-      </ThemeProvider>
+      </BookStoreThemeProvider>
     </>
   );
 }
