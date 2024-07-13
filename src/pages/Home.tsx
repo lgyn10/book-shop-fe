@@ -1,4 +1,5 @@
 import Button from '../components/common/Button';
+import InputText from '../components/common/InputText';
 import Title from '../components/common/Title';
 import { formatNumber } from '../utils/format';
 
@@ -12,6 +13,7 @@ const Home = () => {
       <Button size='medium' scheme='normal'>
         버튼 테스트
       </Button>
+      <InputText placeholder='여기에 입력하세요.' />
       <div>home body</div>
       <div>count: {formatNumber(COUNT)}</div>
     </>
