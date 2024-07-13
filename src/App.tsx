@@ -7,8 +7,8 @@ function App() {
   return (
     <>
       <BookStoreThemeProvider>
-        <ThemeSwitcher />
         <Layout children={<Home />} />
+        <ThemeSwitcher />
       </BookStoreThemeProvider>
     </>
   );
