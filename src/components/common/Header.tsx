@@ -1,23 +1,13 @@
-import { useEffect, useState } from 'react';
 import { FaRegUser, FaSignInAlt } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { fetchCategory } from '../../api/category.api';
 import logo from '../../asset/image/logo.png';
-import { Category } from '../../models/category.model';
+import { useCategory } from '../../hooks/useCategory';
 
 // const CATEGORY = [{ id: null, name: '전체' }, { id: '0', name: '동화' }, { id: '1', name: '소설' }, { id: '2', name: '사회' }];
 
 const Header = () => {
-  const [category, setCategory] = useState<Category[]>([]);
-
-  useEffect(() => {
-    try {
-      fetchCategory().then((data) => setCategory(data));
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
+  const { category } = useCategory(); // 커스텀 훅으로 카테고리 정보를 가져옴
 
   return (
     <StyledHeader>
