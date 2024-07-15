@@ -1,4 +1,5 @@
 import { FaRegUser, FaSignInAlt } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import logo from '../../asset/image/logo.png';
 
@@ -25,13 +26,15 @@ const Header = () => {
   return (
     <StyledHeader>
       <h1 className='logo'>
-        <img src={logo} alt='book store' />
+        <Link to='/'>
+          <img src={logo} alt='book store' />
+        </Link>
       </h1>
       <nav className='category'>
         <ul>
           {CATEGORY.map((item) => (
             <li key={item.id}>
-              <a href={item.id === null ? `/books` : `/books?category_id=${item.id}`}>{item.name}</a>
+              <Link to={item.id === null ? `/books` : `/books?category_id=${item.id}`}>{item.name}</Link>
             </li>
           ))}
         </ul>
@@ -39,16 +42,16 @@ const Header = () => {
       <nav className='auth'>
         <ul>
           <li>
-            <a href='/login'>
+            <Link to='/login'>
               <FaSignInAlt />
               로그인
-            </a>
+            </Link>
           </li>
           <li>
-            <a href='/join'>
+            <Link to='/join'>
               <FaRegUser />
               회원가입
-            </a>
+            </Link>
           </li>
         </ul>
       </nav>
@@ -80,7 +83,7 @@ const StyledHeader = styled.header`
       display: flex;
       gap: 32px;
       li {
-        a {
+        Link {
           font-size: 1.5rem;
           font-weight: 600;
           text-decoration: none;
@@ -97,7 +100,7 @@ const StyledHeader = styled.header`
       display: flex;
       gap: 16px;
       li {
-        a {
+        Link {
           font-size: 1rem;
           font-weight: 600;
           text-decoration: none;
