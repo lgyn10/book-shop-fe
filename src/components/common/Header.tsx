@@ -1,28 +1,24 @@
+import { useEffect, useState } from 'react';
 import { FaRegUser, FaSignInAlt } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { fetchCategory } from '../../api/category.api';
 import logo from '../../asset/image/logo.png';
+import { Category } from '../../models/category.model';
 
-const CATEGORY = [
-  {
-    id: null,
-    name: '전체',
-  },
-  {
-    id: '0',
-    name: '동화',
-  },
-  {
-    id: '1',
-    name: '소설',
-  },
-  {
-    id: '2',
-    name: '사회',
-  },
-];
+// const CATEGORY = [{ id: null, name: '전체' }, { id: '0', name: '동화' }, { id: '1', name: '소설' }, { id: '2', name: '사회' }];
 
 const Header = () => {
+  const [category, setCategory] = useState<Category[]>([]);
+
+  useEffect(() => {
+    try {
+      fetchCategory().then((data) => setCategory(data));
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
   return (
     <StyledHeader>
       <h1 className='logo'>
@@ -32,7 +28,7 @@ const Header = () => {
       </h1>
       <nav className='category'>
         <ul>
-          {CATEGORY.map((item) => (
+          {category.map((item) => (
             <li key={item.id}>
               <Link to={item.id === null ? `/books` : `/books?category_id=${item.id}`}>{item.name}</Link>
             </li>
