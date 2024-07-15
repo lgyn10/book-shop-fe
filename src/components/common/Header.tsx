@@ -83,7 +83,7 @@ const StyledHeader = styled.header`
       display: flex;
       gap: 32px;
       li {
-        Link {
+        a {
           font-size: 1.5rem;
           font-weight: 600;
           text-decoration: none;
@@ -100,7 +100,7 @@ const StyledHeader = styled.header`
       display: flex;
       gap: 16px;
       li {
-        Link {
+        a {
           font-size: 1rem;
           font-weight: 600;
           text-decoration: none;
