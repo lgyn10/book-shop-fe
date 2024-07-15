@@ -18,7 +18,9 @@ export const createClient = (config?: AxiosRequestConfig) => {
     ...config,
   });
 
-  // axiosInstance.interceptors.request.use: axios 인스턴스에서 HTTP 요청을 보내기 전에 실행되는 함수
+  // axiosInstance.interceptors.response.use: axios 인스턴스에서 HTTP 요청을 보내고 나서 실행되는 함수
+  // interceptor: axios 인스턴스에서 HTTP 요청을 보내기 전이나 후에 실행되는 함수
+  // use: HTTP 요청이 성공했을 때와 실패했을 때 실행되는 함수를 등록
   axiosInstance.interceptors.response.use(
     (response) => response, // HTTP 요청이 성공했을 때 실행되는 함수
     (error) => Promise.reject(error) // HTTP 요청이 실패했을 때 실행되는 함수
