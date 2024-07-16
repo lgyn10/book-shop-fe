@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
 import { signup } from '../api/auth.api';
 import Button from '../components/common/Button';
@@ -22,6 +22,7 @@ const Signup = () => {
   //   // 새로고침이 발생하는 이유: form 요소의 submit 버튼을 누르면 form 요소의 action 속성에 정의된 URL로 이동하게 되어 있음
   //   console.log(email, password);
   // };
+  const navigate = useNavigate(); // useNavigate 훅을 사용하여 페이지 이동을 위한 함수를 가져옴
 
   const {
     register, // input 요소를 등록하기 위한 함수
@@ -37,6 +38,7 @@ const Signup = () => {
       .then((res) => {
         console.log('res: ', res);
         alert('회원가입이 완료되었습니다.');
+        navigate('/login');
       })
       .catch((error) => {
         console.log('error: ', error);
