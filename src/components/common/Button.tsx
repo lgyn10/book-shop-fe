@@ -1,7 +1,9 @@
+import { ButtonHTMLAttributes } from 'react';
 import { styled } from 'styled-components';
 import { ButtonScheme, ButtonSize } from '../../style/theme';
 
-interface Props {
+// ButtonHTMLAttributes<HTMLButtonElement> : button 요소에 사용할 수 있는 속성을 정의한 타입
+interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
   size: ButtonSize;
   scheme: ButtonScheme;
