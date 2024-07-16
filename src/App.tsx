@@ -4,6 +4,7 @@ import Layout from './components/layout/Layout';
 import { BookStoreThemeProvider } from './context/themeContext';
 import Error from './Error';
 import Home from './pages/Home';
+import Login from './pages/Login';
 import ResetPassword from './pages/ResetPassword';
 import Signup from './pages/Signup';
 
@@ -27,7 +28,6 @@ const router = createBrowserRouter([
       </Layout>
     ),
   },
-
   {
     path: '/signup',
     element: (
@@ -41,6 +41,14 @@ const router = createBrowserRouter([
     element: (
       <Layout>
         <ResetPassword />
+      </Layout>
+    ),
+  },
+  {
+    path: '/login',
+    element: (
+      <Layout>
+        <Login />
       </Layout>
     ),
   },
