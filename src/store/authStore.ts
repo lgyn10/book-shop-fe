@@ -8,14 +8,14 @@ interface StoreState {
   stotreLogout: () => void;
 }
 
-const getToken = () => {
+export const getToken = () => {
   const token = localStorage.getItem('book-shop-token');
   return token;
 };
-const setToken = (token: string) => {
+export const setToken = (token: string) => {
   localStorage.setItem('book-shop-token', token);
 };
-const removeToken = () => {
+export const removeToken = () => {
   localStorage.removeItem('book-shop-token');
 };
 

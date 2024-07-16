@@ -1,4 +1,5 @@
 import axios, { AxiosRequestConfig } from 'axios';
+import { getToken, removeToken } from '../store/authStore';
 // AxiosRequestConfig: axios 라이브러리에서 제공하는 타입으로, HTTP 요청을 보낼 때 사용하는 설정 객체의 타입
 
 const BASE_URL = 'http://localhost:3000';
@@ -13,6 +14,9 @@ export const createClient = (config?: AxiosRequestConfig) => {
     timeout: DEFAULT_TIMEOUT,
     headers: {
       'Content-Type': 'application/json', // JSON 형식으로 데이터를 주고받음
+      Authorization: getToken() || '', // 로그인 토큰을 HTTP 요청 헤더에 포함
+      // Authorization: `Bearer ${getToken() || ''}`,
+      // Bearer: HTTP 요청 헤더에 토큰을 포함시킬 때 사용하는 방식
     },
     withCredentials: true, // 쿠키를 주고받을 수 있도록 설정
     ...config,
@@ -23,7 +27,19 @@ export const createClient = (config?: AxiosRequestConfig) => {
   // use: HTTP 요청이 성공했을 때와 실패했을 때 실행되는 함수를 등록
   axiosInstance.interceptors.response.use(
     (response) => response, // HTTP 요청이 성공했을 때 실행되는 함수
-    (error) => Promise.reject(error) // HTTP 요청이 실패했을 때 실행되는 함수
+    (error) => {
+      // 로그인 토큰 만료 처리
+      if (error.response?.status === 401) {
+        removeToken();
+        window.location.href = '/login'; // 로그인 페이지로 이동
+        // navigate('/login')을 사용하지 못하는 이유 : react-router-dom의 useHistory 훅을 사용하여 페이지 이동을 처리하고 있기 때문
+        // react-router-dom의 useHistory 훅은 라우터 설정된 컴포넌트에서만 사용 가능
+        // axios 인스턴스에서 HTTP 요청을 보내는 함수는 라우터 설정된 컴포넌트가 아니기 때문에 useHistory 훅을 사용할 수 없음
+        return;
+      }
+      // HTTP 요청이 실패했을 때 실행되는 함수
+      Promise.reject(error);
+    }
   );
 
   // return axios 인스턴스

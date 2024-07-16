@@ -27,13 +27,19 @@ const Login = () => {
 
   const onSubmit = (data: SignupProps) => {
     console.log(data);
-    login(data).then((res) => {
-      console.log('res: ', res);
-      // 상태 변화
-      storeLogin(res.token);
-      showAlert('로그인이 완료되었습니다.');
-      navigate('/');
-    });
+    login(data)
+      .then((res) => {
+        console.log('res: ', res);
+        // 상태 변화
+        storeLogin(res.token);
+        showAlert('로그인이 완료되었습니다.');
+        navigate('/');
+      })
+      // 에러 처리: 서버에서 전달한 에러 메시지를 출력
+      .catch((err) => {
+        console.log('err: ', err);
+        showAlert('로그인에 실패했습니다.');
+      });
   };
 
   return (
