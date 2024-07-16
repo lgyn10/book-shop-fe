@@ -4,6 +4,7 @@ import Layout from './components/layout/Layout';
 import { BookStoreThemeProvider } from './context/themeContext';
 import Error from './Error';
 import Home from './pages/Home';
+import Signup from './pages/Signup';
 
 // createBrowserRouter 함수를 사용하여 라우터를 설정
 const router = createBrowserRouter([
@@ -22,6 +23,15 @@ const router = createBrowserRouter([
     element: (
       <Layout>
         <div>도서 목록</div>
+      </Layout>
+    ),
+  },
+
+  {
+    path: '/signup',
+    element: (
+      <Layout>
+        <Signup />
       </Layout>
     ),
   },
