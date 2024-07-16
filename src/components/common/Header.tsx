@@ -3,11 +3,13 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import logo from '../../asset/image/logo.png';
 import { useCategory } from '../../hooks/useCategory';
+import { useAuthStore } from '../../store/authStore';
 
 // const CATEGORY = [{ id: null, name: '전체' }, { id: '0', name: '동화' }, { id: '1', name: '소설' }, { id: '2', name: '사회' }];
 
 const Header = () => {
   const { category } = useCategory(); // 커스텀 훅으로 카테고리 정보를 가져옴
+  const { isLoggedIn, storeLogin, stotreLogout } = useAuthStore();
 
   return (
     <StyledHeader>
@@ -26,20 +28,30 @@ const Header = () => {
         </ul>
       </nav>
       <nav className='auth'>
-        <ul>
-          <li>
-            <Link to='/login'>
-              <FaSignInAlt />
-              로그인
-            </Link>
-          </li>
-          <li>
-            <Link to='/signup'>
-              <FaRegUser />
-              회원가입
-            </Link>
-          </li>
-        </ul>
+        {isLoggedIn ? (
+          <ul>
+            <Link to={'/cart'}>장바구니</Link>
+            <Link to={'/orderlist'}>주문내역</Link>
+            <li>
+              <button onClick={stotreLogout}>로그아웃</button>
+            </li>
+          </ul>
+        ) : (
+          <ul>
+            <li>
+              <Link to='/login'>
+                <FaSignInAlt />
+                로그인
+              </Link>
+            </li>
+            <li>
+              <Link to='/signup'>
+                <FaRegUser />
+                회원가입
+              </Link>
+            </li>
+          </ul>
+        )}
       </nav>
     </StyledHeader>
   );
@@ -86,13 +98,16 @@ const StyledHeader = styled.header`
       display: flex;
       gap: 16px;
       li {
-        a {
+        a,
+        button {
           font-size: 1rem;
           font-weight: 600;
           text-decoration: none;
           display: flex;
           align-items: center;
           line-height: 1;
+          background-color: transparent;
+          border: 0;
           svg {
             margin-right: 6px;
           }
