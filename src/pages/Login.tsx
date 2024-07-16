@@ -6,6 +6,7 @@ import Button from '../components/common/Button';
 import InputText from '../components/common/InputText';
 import Title from '../components/common/Title';
 import { useAlert } from '../hooks/useAlert';
+import { useAuthStore } from '../store/authStore';
 
 export interface SignupProps {
   email: string;
@@ -15,6 +16,8 @@ export interface SignupProps {
 const Login = () => {
   const navigate = useNavigate();
   const showAlert = useAlert();
+
+  const { isLoggedIn, storeLogin, stotreLogout } = useAuthStore();
 
   const {
     register,
@@ -26,7 +29,8 @@ const Login = () => {
     console.log(data);
     login(data).then((res) => {
       console.log('res: ', res);
-      localStorage.setItem('token', res.token);
+      // 상태 변화
+      storeLogin(res.token);
       showAlert('로그인이 완료되었습니다.');
       navigate('/');
     });
