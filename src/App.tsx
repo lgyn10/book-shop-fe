@@ -4,6 +4,7 @@ import Layout from './components/layout/Layout';
 import { BookStoreThemeProvider } from './context/themeContext';
 import Error from './Error';
 import Home from './pages/Home';
+import ResetPassword from './pages/ResetPassword';
 import Signup from './pages/Signup';
 
 // createBrowserRouter 함수를 사용하여 라우터를 설정
@@ -32,6 +33,14 @@ const router = createBrowserRouter([
     element: (
       <Layout>
         <Signup />
+      </Layout>
+    ),
+  },
+  {
+    path: '/reset',
+    element: (
+      <Layout>
+        <ResetPassword />
       </Layout>
     ),
   },
