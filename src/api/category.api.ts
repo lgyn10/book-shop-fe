@@ -6,5 +6,6 @@ import { httpClient } from './http';
 export const fetchCategory = async () => {
   // <Category> : fetchCategory 함수가 Category 타입의 객체를 반환한다는 것을 명시
   const response = await httpClient.get<Category[]>('/category');
+  console.log('fetchCategory');
   return response.data;
 };

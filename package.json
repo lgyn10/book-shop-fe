@@ -51,5 +51,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://24df4f17-ce6c-43e0-affb-a046d738b8f8.mock.pstmn.io"
+  "proxy": "http://localhost:8888"
 }
