@@ -1,11 +1,12 @@
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { styled } from 'styled-components';
+import { signup } from '../api/auth.api';
 import Button from '../components/common/Button';
 import InputText from '../components/common/InputText';
 import Title from '../components/common/Title';
 
-interface SignupProps {
+export interface SignupProps {
   email: string;
   password: string;
 }
@@ -32,6 +33,16 @@ const Signup = () => {
   // onSubmit 함수 : form 요소의 submit 이벤트를 처리하는 함수
   const onSubmit = (data: SignupProps) => {
     console.log(data);
+    signup(data)
+      .then((res) => {
+        console.log('res: ', res);
+        alert('회원가입이 완료되었습니다.');
+      })
+      .catch((error) => {
+        console.log('error: ', error);
+        console.log(error.response.data.message); // error.response.data.message: 서버에서 전달한 에러 메시지
+        alert(`회원가입에 실패했습니다.`);
+      });
   };
 
   return (
