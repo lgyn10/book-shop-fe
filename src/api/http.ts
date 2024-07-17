@@ -37,6 +37,12 @@ export const createClient = (config?: AxiosRequestConfig) => {
         // axios 인스턴스에서 HTTP 요청을 보내는 함수는 라우터 설정된 컴포넌트가 아니기 때문에 useHistory 훅을 사용할 수 없음
         return;
       }
+
+      if (error.response.config.params.news === true) {
+        alert('신간도서가 없습니다.');
+        return;
+      }
+
       // HTTP 요청이 실패했을 때 실행되는 함수
       Promise.reject(error);
     }
