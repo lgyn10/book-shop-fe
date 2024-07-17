@@ -18,7 +18,7 @@ const Books = () => {
       <StyledBooks>
         <BooksFilter />
         <BooksViewSwitcher />
-        <BooksList />
+        <BooksList books={books} />
         <BooksEmpty />
         <Pagination />
       </StyledBooks>
