@@ -1,6 +1,7 @@
 import { FaHeart } from 'react-icons/fa';
 import { styled } from 'styled-components';
 import { Book } from '../../models/book.model';
+import { Theme } from '../../style/theme';
 import { formatNumber } from '../../utils/format';
 import { getImgSrc } from '../../utils/image';
 
@@ -36,4 +37,54 @@ const BookItem = ({ book }: BookItemProps) => {
 
 export default BookItem;
 
-const StyledBookItem = styled.div``;
+const StyledBookItem = styled.div<{ theme: Theme }>`
+  display: flex;
+  flex-direction: column; // 세로 정렬
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+
+  .img {
+    border-radius: ${({ theme }) => theme.borderRadius.default};
+    overflow: hidden;
+    img {
+      width: 100%;
+    }
+  }
+
+  .content {
+    position: relative; // 좋아요 수를 절대 위치로 설정하기 위해
+    padding: 1rem;
+    .title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin: 0 0 12px 0;
+    }
+    .summary .author {
+      font-size: 0.875rem;
+      color: ${({ theme }) => theme.color.secondary};
+    }
+    .price {
+      font-size: 1rem;
+      font-weight: 700;
+      color: ${({ theme }) => theme.color.secondary};
+    }
+    .likes {
+      display: inline-flex; // 좋아요 아이콘과 텍스트를 가로로 정렬
+      align-items: center;
+      gap: 4px;
+      font-size: 0.875rem;
+      margin-bottom: 0.25rem;
+      color: ${({ theme }) => theme.color.primary};
+      border: 1px solid ${({ theme }) => theme.color.border};
+      border-radius: ${({ theme }) => theme.borderRadius.default};
+      padding: 4px 12px;
+      position: absolute; // 부모 요소인 .content에 상대적으로 위치
+      bottom: 1rem;
+      right: 1rem;
+      svg {
+        color: ${({ theme }) => theme.color.primary};
+        margin-right: 0.25rem;
+        padding: 0;
+      }
+    }
+  }
+`;
