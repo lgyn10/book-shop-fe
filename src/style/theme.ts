@@ -5,7 +5,7 @@ export type ButtonSize = 'small' | 'medium' | 'large';
 export type ButtonScheme = 'primary' | 'normal';
 export type LayoutWidth = 'small' | 'medium' | 'large';
 
-interface Theme {
+export interface Theme {
   name: ThemeName;
   //color: {
   // primary: string;
