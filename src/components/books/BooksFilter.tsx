@@ -38,6 +38,16 @@ const BooksFilter = () => {
 
   // 리팩토링: const currentCategoryId = searchParams.get('category_id');
 
+  const handleNews = () => {
+    const newSearchParams = new URLSearchParams(searchParams);
+    if (newSearchParams.has('news')) {
+      newSearchParams.delete('news');
+    } else {
+      newSearchParams.set('news', 'true');
+    }
+    setSearchParams(newSearchParams);
+  };
+
   return (
     <StyledBooksFilter>
       <div className='category'>
@@ -56,7 +66,7 @@ const BooksFilter = () => {
         ))}
       </div>
       <div className='new'>
-        <Button size='medium' scheme={'normal'}>
+        <Button size='medium' scheme={searchParams.has('news') ? 'primary' : 'normal'} onClick={handleNews}>
           신간
         </Button>
       </div>
