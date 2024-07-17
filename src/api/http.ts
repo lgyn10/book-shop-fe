@@ -39,7 +39,7 @@ export const createClient = (config?: AxiosRequestConfig) => {
       }
 
       if (error.response.config.params.news === true) {
-        alert('신간도서가 없습니다.');
+        console.log('신간도서가 없습니다.');
         return;
       }
 

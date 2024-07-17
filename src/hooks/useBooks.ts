@@ -11,6 +11,7 @@ export const useBooks = () => {
 
   const [books, setBooks] = useState<Book[]>([]);
   const [pagination, setPagination] = useState<Pagination>({ totalCount: 0, currentPage: 1 });
+  const [isEmpty, setIsEmpty] = useState(true);
 
   useEffect(() => {
     // URLSearchParams 인스턴스를 생성하고 search 속성을 전달
@@ -25,8 +26,9 @@ export const useBooks = () => {
     fetchBooks({ categoryId, news, currentPage, limit }).then((res) => {
       setBooks(res.books); // 책 목록을 업데이트
       setPagination(res.pagination); // 페이징 정보를 업데이트
+      setIsEmpty(res.books.length === 0); // 책 목록이 비어있는지 확인
     });
   }, [location.search]);
 
-  return { books, pagination };
+  return { books, pagination, isEmpty };
 };

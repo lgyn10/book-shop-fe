@@ -8,7 +8,7 @@ import Title from '../components/common/Title';
 import { useBooks } from '../hooks/useBooks';
 
 const Books = () => {
-  const { books, pagination } = useBooks();
+  const { books, pagination, isEmpty } = useBooks();
   // console.log(books); // 책 목록
   // console.log(pagination); // 페이징 정보
 
@@ -18,9 +18,9 @@ const Books = () => {
       <StyledBooks>
         <BooksFilter />
         <BooksViewSwitcher />
-        {books.length > 0 && <BooksList books={books} />}
-        {books.length === 0 && <BooksEmpty />}
-        {books.length > 0 && <Pagination />}
+        {!isEmpty && <BooksList books={books} />}
+        {isEmpty && <BooksEmpty />}
+        {!isEmpty && <Pagination />}
       </StyledBooks>
     </>
   );
