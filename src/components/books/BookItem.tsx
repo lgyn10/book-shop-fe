@@ -19,7 +19,7 @@ const BookItem = ({ book }: BookItemProps) => {
   return (
     <StyledBookItem>
       <div className='img'>
-        <img src={getImgSrc(book.id)} alt={book.title} />
+        <img src={getImgSrc(book.img)} alt={book.title} />
       </div>
       <div className='content'>
         <h2 className='title'>{book.title}</h2>
@@ -27,7 +27,7 @@ const BookItem = ({ book }: BookItemProps) => {
         <div className='author'>{book.author}</div>
         <div className='price'>{formatNumber(book.price)}원</div>
         <div className='likes'>
-          <FaHeart />
+          <FaHeart data-testid='like-icon' />
           {book.likes}
         </div>
       </div>
