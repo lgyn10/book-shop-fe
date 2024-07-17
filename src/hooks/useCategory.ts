@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { fetchCategory } from '../api/category.api';
+import { QUERYSTRING } from '../constants/querystring';
 import { Category } from '../models/category.model';
 
 // 카테고리 정보를 가져오는 커스텀 훅
@@ -14,11 +15,11 @@ export const useCategory = () => {
 
   const setActive = () => {
     const params = new URLSearchParams(location.search); // URLSearchParams 인스턴스를 생성하고 search 속성을 전달
-    if (params.has('category_id')) {
-      const categoryId = Number(params.get('category_id')); // 'category_id' 키의 값을 가져옴
+    if (params.has(QUERYSTRING.CATEGORY_ID)) {
+      const categoryId = Number(params.get(QUERYSTRING.CATEGORY_ID)); // category_id 키의 값을 가져옴
       setCategory((prev) => {
         return prev.map((item) => ({ ...item, isActive: item.id === categoryId }));
-        // 카테고리 목록을 순회하면서 'category_id'와 일치하는 카테고리를 활성화
+        // 카테고리 목록을 순회하면서 category_id와 일치하는 카테고리를 활성화
       });
     } else {
       // 전체를 선택한 경우, 모든 카테고리를 비활성화

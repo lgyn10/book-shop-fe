@@ -1,5 +1,6 @@
 import { useSearchParams } from 'react-router-dom';
 import { styled } from 'styled-components';
+import { QUERYSTRING } from '../../constants/querystring';
 import { useCategory } from '../../hooks/useCategory';
 import Button from '../common/Button';
 
@@ -27,10 +28,10 @@ const BooksFilter = () => {
     const newSearchParams = new URLSearchParams(searchParams);
     // id가 null이면 'category' 키를 삭제
     if (id === null) {
-      newSearchParams.delete('category_id');
+      newSearchParams.delete(QUERYSTRING.CATEGORY_ID);
     } else {
       // id가 null이 아니면 'category' 키를 추가
-      newSearchParams.set('category_id', id.toString());
+      newSearchParams.set(QUERYSTRING.CATEGORY_ID, id.toString());
     }
     // setSearchParams 함수를 호출하여 URL을 업데이트
     setSearchParams(newSearchParams);
@@ -40,10 +41,10 @@ const BooksFilter = () => {
 
   const handleNews = () => {
     const newSearchParams = new URLSearchParams(searchParams);
-    if (newSearchParams.has('news')) {
-      newSearchParams.delete('news');
+    if (newSearchParams.has(QUERYSTRING.NEWS)) {
+      newSearchParams.delete(QUERYSTRING.NEWS);
     } else {
-      newSearchParams.set('news', 'true');
+      newSearchParams.set(QUERYSTRING.NEWS, 'true');
     }
     setSearchParams(newSearchParams);
   };
@@ -65,8 +66,8 @@ const BooksFilter = () => {
           </Button>
         ))}
       </div>
-      <div className='new'>
-        <Button size='medium' scheme={searchParams.has('news') ? 'primary' : 'normal'} onClick={handleNews}>
+      <div className={QUERYSTRING.NEWS}>
+        <Button size='medium' scheme={searchParams.has(QUERYSTRING.NEWS) ? 'primary' : 'normal'} onClick={handleNews}>
           신간
         </Button>
       </div>
