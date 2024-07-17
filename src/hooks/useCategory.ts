@@ -15,8 +15,9 @@ export const useCategory = () => {
 
   const setActive = () => {
     const params = new URLSearchParams(location.search); // URLSearchParams 인스턴스를 생성하고 search 속성을 전달
+    // console.log(params.has(QUERYSTRING.CATEGORY_ID));
     if (params.has(QUERYSTRING.CATEGORY_ID)) {
-      const categoryId = Number(params.get(QUERYSTRING.CATEGORY_ID)); // category_id 키의 값을 가져옴
+      const categoryId = params.has(QUERYSTRING.CATEGORY_ID) ? Number(params.get(QUERYSTRING.CATEGORY_ID)) : undefined; // category_id 키의 값을 가져옴
       setCategory((prev) => {
         return prev.map((item) => ({ ...item, isActive: item.id === categoryId }));
         // 카테고리 목록을 순회하면서 category_id와 일치하는 카테고리를 활성화
