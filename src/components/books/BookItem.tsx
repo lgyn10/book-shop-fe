@@ -1,12 +1,13 @@
 import { FaHeart } from 'react-icons/fa';
 import { styled } from 'styled-components';
 import { Book } from '../../models/book.model';
-import { Theme } from '../../style/theme';
 import { formatNumber } from '../../utils/format';
 import { getImgSrc } from '../../utils/image';
+import { ViewMode } from './BooksViewSwitcher';
 
 interface BookItemProps {
   book: Book;
+  view?: ViewMode;
 }
 // BookItem 구성 요소
 // 이미지
@@ -15,9 +16,9 @@ interface BookItemProps {
 // 저자
 // 가격
 // 좋아요 수
-const BookItem = ({ book }: BookItemProps) => {
+const BookItem = ({ book, view }: BookItemProps) => {
   return (
-    <StyledBookItem>
+    <StyledBookItem view={view}>
       <div className='img'>
         <img src={getImgSrc(book.img)} alt={book.title} />
       </div>
@@ -37,14 +38,16 @@ const BookItem = ({ book }: BookItemProps) => {
 
 export default BookItem;
 
-const StyledBookItem = styled.div<{ theme: Theme }>`
+const StyledBookItem = styled.div<Pick<BookItemProps, 'view'>>`
+  // Pick: BookItemProps에서 view만 가져옴
   display: flex;
-  flex-direction: column; // 세로 정렬
+  flex-direction: ${({ view }) => (view === 'grid' ? 'column' : 'row')};
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
 
   .img {
     border-radius: ${({ theme }) => theme.borderRadius.default};
     overflow: hidden;
+    width: ${({ view }) => (view === 'grid' ? 'auto' : '160px')};
     img {
       width: 100%;
     }
@@ -53,6 +56,7 @@ const StyledBookItem = styled.div<{ theme: Theme }>`
   .content {
     position: relative; // 좋아요 수를 절대 위치로 설정하기 위해
     padding: 1rem;
+    flex: ${({ view }) => (view === 'grid' ? '0' : '1')}; // grid 뷰일 때 이미지와 내용이 겹치지 않도록 설정
     .title {
       font-size: 1.25rem;
       font-weight: 700;
