@@ -3,6 +3,7 @@ import ThemeSwitcher from './components/header/ThemeSwitcher';
 import Layout from './components/layout/Layout';
 import { BookStoreThemeProvider } from './context/themeContext';
 import Error from './Error';
+import Books from './pages/Books';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import ResetPassword from './pages/ResetPassword';
@@ -24,7 +25,7 @@ const router = createBrowserRouter([
     path: '/books',
     element: (
       <Layout>
-        <div>도서 목록</div>
+        <Books />
       </Layout>
     ),
   },
