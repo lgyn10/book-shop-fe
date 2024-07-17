@@ -3,7 +3,7 @@ import { Pagination } from '../models/pagination.model';
 import { httpClient } from './http';
 
 interface FetchBooksParams {
-  category_id?: number;
+  categoryId?: number;
   news?: boolean;
   currentPage?: number;
   limit: number;
