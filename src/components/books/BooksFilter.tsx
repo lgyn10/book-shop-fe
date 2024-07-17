@@ -36,7 +36,7 @@ const BooksFilter = () => {
     setSearchParams(newSearchParams);
   };
 
-  const currentCategoryId = searchParams.get('category_id');
+  // 리팩토링: const currentCategoryId = searchParams.get('category_id');
 
   return (
     <StyledBooksFilter>
@@ -45,7 +45,8 @@ const BooksFilter = () => {
           <Button
             size='medium'
             key={item.id}
-            scheme={currentCategoryId === item.id?.toString() ? 'primary' : 'normal'}
+            // 리팩토링: scheme={currentCategoryId === item.id?.toString() ? 'primary' : 'normal'}
+            scheme={item.isActive ? 'primary' : 'normal'}
             onClick={() => {
               handleCategory(item.id);
             }}
