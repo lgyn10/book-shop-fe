@@ -1,3 +1,4 @@
+import { useSearchParams } from 'react-router-dom';
 import { styled } from 'styled-components';
 import { useCategory } from '../../hooks/useCategory';
 import Button from '../common/Button';
@@ -14,11 +15,40 @@ import Button from '../common/Button';
 
 const BooksFilter = () => {
   const { category } = useCategory();
+
+  // URL의 쿼리 스트링을 가져오는 useSearchParams 훅
+  // seachParams: URLSearchParams 인스턴스
+  // setSearchParams: URLSearchParams 인스턴스를 업데이트하는 함수
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const handleCategory = (id: number | null) => {
+    // URLSearchParams: URL의 쿼리 스트링을 다루는 객체
+    // URLSearchParams 인스턴스를 생성하고 searchParams를 전달
+    const newSearchParams = new URLSearchParams(searchParams);
+    console.log('newSearchParams: ', newSearchParams);
+    // id가 null이면 'category' 키를 삭제
+    if (id === null) {
+      newSearchParams.delete('category_id');
+    } else {
+      // id가 null이 아니면 'category' 키를 추가
+      newSearchParams.set('category_id', id.toString());
+    }
+    // setSearchParams 함수를 호출하여 URL을 업데이트
+    setSearchParams(newSearchParams);
+  };
+
   return (
     <StyledBooksFilter>
       <div className='category'>
         {category.map((item) => (
-          <Button size='medium' key={item.id} scheme={'normal'}>
+          <Button
+            size='medium'
+            key={item.id}
+            scheme={'normal'}
+            onClick={() => {
+              handleCategory(item.id);
+            }}
+          >
             {item.name}
           </Button>
         ))}
