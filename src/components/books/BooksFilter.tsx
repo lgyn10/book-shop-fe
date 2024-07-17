@@ -25,7 +25,6 @@ const BooksFilter = () => {
     // URLSearchParams: URL의 쿼리 스트링을 다루는 객체
     // URLSearchParams 인스턴스를 생성하고 searchParams를 전달
     const newSearchParams = new URLSearchParams(searchParams);
-    console.log('newSearchParams: ', newSearchParams);
     // id가 null이면 'category' 키를 삭제
     if (id === null) {
       newSearchParams.delete('category_id');
@@ -37,6 +36,8 @@ const BooksFilter = () => {
     setSearchParams(newSearchParams);
   };
 
+  const currentCategoryId = searchParams.get('category_id');
+
   return (
     <StyledBooksFilter>
       <div className='category'>
@@ -44,7 +45,7 @@ const BooksFilter = () => {
           <Button
             size='medium'
             key={item.id}
-            scheme={'normal'}
+            scheme={currentCategoryId === item.id?.toString() ? 'primary' : 'normal'}
             onClick={() => {
               handleCategory(item.id);
             }}
