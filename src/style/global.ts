@@ -17,6 +17,7 @@ h1{
 }
 
 * {
-  color: ${(props) => (props.themeName === 'light' ? 'gray' : 'white')}
+  color: ${(props) => (props.themeName === 'light' ? 'gray' : 'white')};
+  border: none
 }
 `;
