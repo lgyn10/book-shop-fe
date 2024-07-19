@@ -1,5 +1,6 @@
 import { Link, useParams } from 'react-router-dom';
 import { styled } from 'styled-components';
+import AddToCart from '../components/bookDetail/AddToCart';
 import LikeButton from '../components/bookDetail/LikeButton';
 import EllipsisBox from '../components/common/EllipsisBox';
 import Title from '../components/common/Title';
@@ -16,7 +17,7 @@ const bookInfoList = [
     filter: (book: IBookDetail) => <Link to={`/books?categoryId=${book.category_id}`}>{book.category_name}</Link>,
   },
   { label: '포멧', key: 'form' },
-  { label: '저자', key: 'author' },
+
   { label: '페이지', key: 'pages' },
   { label: 'ISBN', key: 'isbn' },
   {
@@ -33,7 +34,6 @@ const bookInfoList = [
       return `${book.price.toLocaleString()}원`;
     },
   },
-  { label: '요약', key: 'summary' },
 ];
 
 const BookDetail = () => {
@@ -67,7 +67,9 @@ const BookDetail = () => {
           <div className='like'>
             <LikeButton book={book} onClick={likeToggle} />
           </div>
-          <div className='add-cart'>장바구니 넣기</div>
+          <div className='add-cart'>
+            <AddToCart book={book} />
+          </div>
         </div>
       </header>
       <div className='content'>
@@ -85,7 +87,8 @@ export default BookDetail;
 const StyledBookDetail = styled.div`
   .header {
     display: flex;
-    align-items: center;
+    align-items: start;
+    // start와 flex-start의 차이 : start는 flex-direction에 따라 달라짐, flex-start는 항상 시작점
     gap: 1.5rem;
     padding: 0 0 1.5rem 0;
 
@@ -101,6 +104,7 @@ const StyledBookDetail = styled.div`
       flex: 1;
       display: flex;
       flex-direction: column;
+
       gap: 0.75rem;
 
       dl {
