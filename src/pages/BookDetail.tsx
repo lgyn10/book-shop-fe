@@ -1,5 +1,6 @@
 import { Link, useParams } from 'react-router-dom';
 import { styled } from 'styled-components';
+import LikeButton from '../components/bookDetail/LikeButton';
 import EllipsisBox from '../components/common/EllipsisBox';
 import Title from '../components/common/Title';
 import { useBook } from '../hooks/useBook';
@@ -37,7 +38,7 @@ const bookInfoList = [
 
 const BookDetail = () => {
   const { bookId } = useParams(); // URL 파라미터에서 bookId 추출
-  const { book } = useBook(bookId); // useBook 훅을 사용하여 book 정보 가져오기
+  const { book, likeToggle } = useBook(bookId); // useBook 훅을 사용하여 book 정보 가져오기
 
   // console.log('book:', book);
   //! Early return: book이 없으면 null 반환
@@ -63,7 +64,9 @@ const BookDetail = () => {
             </dl>
           ))}
           <p className='summary'>{book.summary}</p>
-          <div className='like'>라이크</div>
+          <div className='like'>
+            <LikeButton book={book} onClick={likeToggle} />
+          </div>
           <div className='add-cart'>장바구니 넣기</div>
         </div>
       </header>

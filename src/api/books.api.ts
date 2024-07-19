@@ -38,3 +38,22 @@ export const fetchBook = async (bookId: string) => {
     console.log(error);
   }
 };
+
+// likeBook 함수는 도서 ID를 받아 해당 도서의 좋아요 상태를 토글하는 함수
+export const likeBook = async (bookId: number) => {
+  try {
+    const response = await httpClient.post<BookDetail>(`/likes/${bookId}`);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const unlikeBook = async (bookId: number) => {
+  try {
+    const response = await httpClient.delete<BookDetail>(`/likes/${bookId}`);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
