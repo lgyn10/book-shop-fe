@@ -19,7 +19,7 @@ const dummyBook: Book = {
   detail: '',
   pages: 0,
   contents: '',
-  pubDate: '',
+  pub_date: '',
 };
 
 describe('BookItem', () => {
