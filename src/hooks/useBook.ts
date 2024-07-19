@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { fetchBook, likeBook, unlikeBook } from '../api/books.api';
+import { addCart } from '../api/carts.api';
 import { BookDetail } from '../models/book.model';
 import { useAuthStore } from '../store/authStore';
 import { useAlert } from './useAlert';
@@ -9,6 +10,7 @@ export const useBook = (bookId: string | undefined) => {
   const [book, setBook] = useState<BookDetail | null>(null);
   const { isLoggedIn } = useAuthStore();
   const showAlert = useAlert();
+  const [cartAdded, setCartAdded] = useState(false);
 
   useEffect(() => {
     // bookId가 없으면 함수를 종료
@@ -19,6 +21,7 @@ export const useBook = (bookId: string | undefined) => {
     });
   }, [bookId]);
 
+  //! 좋아요 토글
   const likeToggle = () => {
     // 권한 확인 후, 로그인이 되어 있지 않으면 함수를 종료
     if (!isLoggedIn) {
@@ -44,8 +47,22 @@ export const useBook = (bookId: string | undefined) => {
     }
   };
 
-  return { book, likeToggle };
+  //! 장바구니 담기
+  const addToCart = (quantity: number) => {
+    if (!book) return;
+
+    if (isLoggedIn === false) {
+      showAlert('로그인이 필요한 서비스입니다.');
+      return;
+    }
+    addCart({ bookId: book.id, quantity }).then((res) => {
+      // showAlert('장바구니에 추가했습니다.');
+      setCartAdded(true);
+      setTimeout(() => {
+        setCartAdded(false);
+      }, 3000);
+    });
+  };
+
+  return { book, likeToggle, addToCart, cartAdded };
 };
-function useAuth(): { isLogedIn: any } {
-  throw new Error('Function not implemented.');
-}
