@@ -1,4 +1,5 @@
 import { FaHeart } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 import { styled } from 'styled-components';
 import { Book } from '../../models/book.model';
 import { formatNumber } from '../../utils/format';
@@ -19,19 +20,21 @@ interface BookItemProps {
 const BookItem = ({ book, view }: BookItemProps) => {
   return (
     <StyledBookItem view={view}>
-      <div className='img'>
-        <img src={getImgSrc(book.img)} alt={book.title} />
-      </div>
-      <div className='content'>
-        <h2 className='title'>{book.title}</h2>
-        <div className='summary'>{book.summary}</div>
-        <div className='author'>{book.author}</div>
-        <div className='price'>{formatNumber(book.price)}원</div>
-        <div className='likes'>
-          <FaHeart data-testid='like-icon' />
-          {book.likes}
+      <Link to={`/book/${book.id}`}>
+        <div className='img'>
+          <img src={getImgSrc(book.img)} alt={book.title} />
         </div>
-      </div>
+        <div className='content'>
+          <h2 className='title'>{book.title}</h2>
+          <div className='summary'>{book.summary}</div>
+          <div className='author'>{book.author}</div>
+          <div className='price'>{formatNumber(book.price)}원</div>
+          <div className='likes'>
+            <FaHeart data-testid='like-icon' />
+            {book.likes}
+          </div>
+        </div>
+      </Link>
     </StyledBookItem>
   );
 };
@@ -40,9 +43,12 @@ export default BookItem;
 
 const StyledBookItem = styled.div<Pick<BookItemProps, 'view'>>`
   // Pick: BookItemProps에서 view만 가져옴
-  display: flex;
-  flex-direction: ${({ view }) => (view === 'grid' ? 'column' : 'row')};
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+  a {
+    display: flex;
+    flex-direction: ${({ view }) => (view === 'grid' ? 'column' : 'row')};
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+  }
 
   .img {
     border-radius: ${({ theme }) => theme.borderRadius.default};
