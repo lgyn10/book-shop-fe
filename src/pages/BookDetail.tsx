@@ -1,5 +1,6 @@
 import { Link, useParams } from 'react-router-dom';
 import { styled } from 'styled-components';
+import EllipsisBox from '../components/common/EllipsisBox';
 import Title from '../components/common/Title';
 import { useBook } from '../hooks/useBook';
 import { BookDetail as IBookDetail } from '../models/book.model';
@@ -66,8 +67,12 @@ const BookDetail = () => {
           <div className='add-cart'>장바구니 넣기</div>
         </div>
       </header>
-      <div className='content'></div>
-      {bookId}
+      <div className='content'>
+        <Title size='medium'>상세 설명</Title>
+        <EllipsisBox linelimit={4}>{book.detail}</EllipsisBox>
+        <Title size={'medium'}>목차</Title>
+        <p className='index'>{book.contents}</p>
+      </div>
     </StyledBookDetail>
   );
 };
@@ -106,6 +111,20 @@ const StyledBookDetail = styled.div`
           color: ${({ theme }) => theme.color.primary};
         }
       }
+    }
+  }
+  .content {
+    .detail {
+      // height: 200px;
+      // height로 설명하면 내용이 길어지면 잘림
+      /* overflow: hidden;
+      text-overflow: ellipsis; // 텍스트가 넘칠 때 말줄임표
+      display: -webkit-box; // 브라우저 엔진
+      /-webkit-line-clamp: 4; // 4줄까지 표시
+      /-webkit-box-orient: vertical; // 세로 방향으로 표시 */
+    }
+    .index {
+      white-space: pre-wrap;
     }
   }
 `;
