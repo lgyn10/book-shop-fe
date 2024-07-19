@@ -1,4 +1,4 @@
-import { Book } from '../models/book.model';
+import { Book, BookDetail } from '../models/book.model';
 import { Pagination } from '../models/pagination.model';
 import { httpClient } from './http';
 
@@ -26,5 +26,15 @@ export const fetchBooks = async (params: FetchBooksParams) => {
         currentPage: 1,
       },
     };
+  }
+};
+
+// bookId : stirng - 파라미터로 받은 도서 ID
+export const fetchBook = async (bookId: string) => {
+  try {
+    const response = await httpClient.get<BookDetail>(`/books/${bookId}`);
+    return response.data;
+  } catch (error) {
+    console.log(error);
   }
 };
