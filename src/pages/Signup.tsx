@@ -25,7 +25,7 @@ const Signup = () => {
   // };
 
   const navigate = useNavigate(); // useNavigate 훅을 사용하여 페이지 이동을 위한 함수를 가져옴
-  const showAlert = useAlert(); // useAlert 훅을 사용하여 alert 함수를 가져옴
+  const { showAlert } = useAlert(); // useAlert 훅을 사용하여 alert 함수를 가져옴
 
   const {
     register, // input 요소를 등록하기 위한 함수

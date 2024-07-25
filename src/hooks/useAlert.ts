@@ -7,5 +7,9 @@ export const useAlert = () => {
     alert(message);
   }, []); // 빈 배열을 전달하여 함수를 캐싱
 
-  return showAlert;
+  const showConfirm = useCallback((message: string) => {
+    return window.confirm(message);
+  }, []); // 빈 배열을 전달하여 함수를 캐싱
+
+  return { showAlert, showConfirm };
 };

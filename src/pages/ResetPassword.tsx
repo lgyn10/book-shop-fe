@@ -16,7 +16,7 @@ interface ResetPasswordProps {
 const ResetPassword = () => {
   const [resetRequested, setResetRequested] = useState(false);
   const navigator = useNavigate();
-  const showAlert = useAlert();
+  const { showAlert } = useAlert();
   const {
     register,
     handleSubmit,
