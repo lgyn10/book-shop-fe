@@ -5,8 +5,10 @@ import { BookStoreThemeProvider } from './context/themeContext';
 import Error from './Error';
 import BookDetail from './pages/BookDetail';
 import Books from './pages/Books';
+import Cart from './pages/Cart';
 import Home from './pages/Home';
 import Login from './pages/Login';
+import Order from './pages/Order';
 import ResetPassword from './pages/ResetPassword';
 import Signup from './pages/Signup';
 
@@ -59,6 +61,22 @@ const router = createBrowserRouter([
     element: (
       <Layout>
         <BookDetail />
+      </Layout>
+    ),
+  },
+  {
+    path: '/carts',
+    element: (
+      <Layout>
+        <Cart />
+      </Layout>
+    ),
+  },
+  {
+    path: '/order',
+    element: (
+      <Layout>
+        <Order />
       </Layout>
     ),
   },

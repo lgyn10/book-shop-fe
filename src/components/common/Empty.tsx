@@ -1,23 +1,27 @@
-import { FaSmile } from 'react-icons/fa';
 import { styled } from 'styled-components';
-import Title from '../common/Title';
+import Title from './Title';
 
-const BooksEmpty = () => {
+interface EmptyProps {
+  icon?: React.ReactNode;
+  title: string;
+  description?: React.ReactNode;
+}
+
+const Empty = ({ icon, title, description }: EmptyProps) => {
   return (
-    <StyledBooksEmpty>
-      <div className='icon'>
-        <FaSmile />
-      </div>
+    <StyledEmpty>
+      {icon && <div className='icon'>{icon}</div>}
       <Title size={'large'} color='secondary'>
-        검색결과가 없습니다.
+        {title}
       </Title>
-    </StyledBooksEmpty>
+      {description && <p>{description}</p>}
+    </StyledEmpty>
   );
 };
 
-export default BooksEmpty;
+export default Empty;
 
-const StyledBooksEmpty = styled.div`
+const StyledEmpty = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;

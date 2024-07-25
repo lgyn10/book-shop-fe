@@ -1,3 +1,4 @@
+import { Cart } from '../models/cart.model';
 import { getToken } from '../store/authStore';
 import { httpClient } from './http';
 
@@ -13,13 +14,22 @@ interface AddCartParams {
   quantity: number;
 }
 
+//- 강의에서는 hook에 try-catch문을 쓰지 않음 -> api에서 처리?
+
 // 장바구니 도서 추가
 export const addCart = async (params: AddCartParams) => {
-  try {
-    // 헤더에 jwt 토큰도 보냄
-    const response = await httpClient.post(`/carts`, { ...params }, { headers: { Authorization: getToken() } });
-    return response.data;
-  } catch (error) {
-    console.log(error);
-  }
+  // 헤더에 jwt 토큰도 보냄
+  const response = await httpClient.post(`/carts`, { ...params }, { headers: { Authorization: getToken() } });
+  return response.data;
+};
+
+// 장바구니 아이템들 조회
+export const fetchCarts = async () => {
+  const response = await httpClient.get<Cart[]>(`/carts`, { headers: { Authorization: getToken() } });
+  return response.data;
+};
+
+export const deleteCart = async (cartItemId: number) => {
+  const response = await httpClient.delete(`/carts/${cartItemId}`, { headers: { Authorization: getToken() } });
+  return response.data;
 };

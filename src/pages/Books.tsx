@@ -1,5 +1,6 @@
 import { styled } from 'styled-components';
-import BooksEmpty from '../components/books/BooksEmpty';
+
+import BookEmpty from '../components/books/BookEmpty';
 import BooksFilter from '../components/books/BooksFilter';
 import BooksList from '../components/books/BooksList';
 import BooksViewSwitcher from '../components/books/BooksViewSwitcher';
@@ -21,7 +22,7 @@ const Books = () => {
           <BooksViewSwitcher />
         </div>
         {!isEmpty && <BooksList books={books} />}
-        {isEmpty && <BooksEmpty />}
+        {isEmpty && <BookEmpty />}
         {!isEmpty && <Pagination pagination={pagination} />}
       </StyledBooks>
     </>

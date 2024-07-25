@@ -30,7 +30,7 @@ const Header = () => {
       <nav className='auth'>
         {isLoggedIn ? (
           <ul>
-            <Link to={'/cart'}>장바구니</Link>
+            <Link to={'/carts'}>장바구니</Link>
             <Link to={'/orderlist'}>주문내역</Link>
             <li>
               <button onClick={stotreLogout}>로그아웃</button>

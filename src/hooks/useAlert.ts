@@ -7,8 +7,11 @@ export const useAlert = () => {
     alert(message);
   }, []); // 빈 배열을 전달하여 함수를 캐싱
 
-  const showConfirm = useCallback((message: string) => {
-    return window.confirm(message);
+  // confirm 창을 띄우는 함수
+  const showConfirm = useCallback((message: string, onConfirm: () => void) => {
+    if (window.confirm(message)) {
+      onConfirm();
+    }
   }, []); // 빈 배열을 전달하여 함수를 캐싱
 
   return { showAlert, showConfirm };
