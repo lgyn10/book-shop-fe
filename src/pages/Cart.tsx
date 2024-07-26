@@ -60,8 +60,8 @@ const Cart = () => {
     const orderData: Omit<OrderRequest, 'delivery'> = {
       items: checkedItem,
       totalPrice: getTotalPrice,
-      totalQuatity: getTotalQuantity,
-      firstBookTitle: carts[0].title,
+      totalQuantity: getTotalQuantity,
+      representBookTitle: carts[0].title,
     };
     // console.log(orderData);
     showConfirm('주문서 작성 페이지로 이동하시겠습니까?', () => {
