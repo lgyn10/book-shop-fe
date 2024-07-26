@@ -9,6 +9,7 @@ import Cart from './pages/Cart';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Order from './pages/Order';
+import OrderList from './pages/OrderList';
 import ResetPassword from './pages/ResetPassword';
 import Signup from './pages/Signup';
 
@@ -77,6 +78,14 @@ const router = createBrowserRouter([
     element: (
       <Layout>
         <Order />
+      </Layout>
+    ),
+  },
+  {
+    path: '/orderlist',
+    element: (
+      <Layout>
+        <OrderList />
       </Layout>
     ),
   },
