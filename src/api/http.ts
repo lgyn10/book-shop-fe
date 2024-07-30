@@ -57,3 +57,33 @@ export const createClient = (config?: AxiosRequestConfig) => {
 // 이렇게 생성한 axios 인스턴스는 API 요청을 보내는 데 사용
 // 이렇게 axios 인스턴스를 생성하면, baseURL, timeout, headers, withCredentials 등의 설정을 공통으로 사용할 수 있음
 export const httpClient = createClient();
+
+//! 공통 요청 부분
+// 개인적으로 필요하다고는 생각하지 않음
+// axios의 매개변수 타입을 따로 다 지정해줘야함
+type RequestType = 'get' | 'post' | 'put' | 'delete';
+export const requestHandler = async <T>(
+  method: RequestType,
+  url: string,
+  payload?: T,
+  config?: AxiosRequestConfig<T>
+) => {
+  let response;
+  switch (method) {
+    case 'get':
+      response = await httpClient.get(url, config);
+      break;
+    case 'post':
+      response = await httpClient.post(url, payload, config);
+      break;
+    case 'put':
+      response = await httpClient.put(url, payload, config);
+      break;
+    case 'delete':
+      response = await httpClient.delete(url, config);
+      break;
+    default:
+      throw new Error('Unsupported method');
+  }
+  return response.data;
+};
