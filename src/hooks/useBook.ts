@@ -1,7 +1,8 @@
+import { fetchBookReviews } from '@/api/review.api';
 import { useEffect, useState } from 'react';
 import { fetchBook, likeBook, unlikeBook } from '../api/books.api';
 import { addCart } from '../api/carts.api';
-import { BookDetail } from '../models/book.model';
+import { BookDetail, BookReviewItem } from '../models/book.model';
 import { useAuthStore } from '../store/authStore';
 import { useAlert } from './useAlert';
 
@@ -18,6 +19,10 @@ export const useBook = (bookId: string | undefined) => {
 
     fetchBook(bookId).then((book) => {
       setBook(book ?? null);
+    });
+    //- 리뷰 테스트
+    fetchBookReviews(Number(bookId)).then((reviews) => {
+      setReviews(reviews);
     });
   }, [bookId]);
 
@@ -64,5 +69,8 @@ export const useBook = (bookId: string | undefined) => {
     });
   };
 
-  return { book, likeToggle, addToCart, cartAdded };
+  //- 리뷰 테스트
+  const [reviews, setReviews] = useState<BookReviewItem[]>([]);
+
+  return { book, likeToggle, addToCart, cartAdded, reviews };
 };
