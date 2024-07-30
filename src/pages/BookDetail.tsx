@@ -1,3 +1,4 @@
+import BookReview from '@/components/bookDetail/BookReview';
 import { Link, useParams } from 'react-router-dom';
 import { styled } from 'styled-components';
 import AddToCart from '../components/bookDetail/AddToCart';
@@ -38,7 +39,7 @@ const bookInfoList = [
 
 const BookDetail = () => {
   const { bookId } = useParams(); // URL 파라미터에서 bookId 추출
-  const { book, likeToggle } = useBook(bookId); // useBook 훅을 사용하여 book 정보 가져오기
+  const { book, likeToggle, reviews } = useBook(bookId); // useBook 훅을 사용하여 book 정보 가져오기
 
   // console.log('book:', book);
   //! Early return: book이 없으면 null 반환
@@ -77,6 +78,8 @@ const BookDetail = () => {
         <EllipsisBox linelimit={4}>{book.detail}</EllipsisBox>
         <Title size={'medium'}>목차</Title>
         <p className='index'>{book.contents}</p>
+        <Title size={'medium'}>리뷰</Title>
+        <BookReview reviews={reviews} />
       </div>
     </StyledBookDetail>
   );
