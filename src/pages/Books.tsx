@@ -9,10 +9,11 @@ import Title from '../components/common/Title';
 import { useBooks } from '../hooks/useBooks';
 
 const Books = () => {
-  const { books, pagination, isEmpty } = useBooks();
+  const { books, pagination, isEmpty, isBooksLoading } = useBooks();
   // console.log(books); // 책 목록
   // console.log(pagination); // 페이징 정보
 
+  console.log('isBooksLoading:', isBooksLoading); // 데이터를 가져오는 중인지 확인
   return (
     <>
       <Title size='large'>도서 검색 결과</Title>
@@ -21,9 +22,9 @@ const Books = () => {
           <BooksFilter />
           <BooksViewSwitcher />
         </div>
-        {!isEmpty && <BooksList books={books} />}
+        {!isEmpty && books && <BooksList books={books} />}
         {isEmpty && <BookEmpty />}
-        {!isEmpty && <Pagination pagination={pagination} />}
+        {!isEmpty && pagination && <Pagination pagination={pagination} />}
       </StyledBooks>
     </>
   );

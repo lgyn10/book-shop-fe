@@ -1,3 +1,5 @@
+import { queryClient } from '@/api/queryClient';
+import { QueryClientProvider } from 'react-query';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import ThemeSwitcher from './components/header/ThemeSwitcher';
 import Layout from './components/layout/Layout';
@@ -77,10 +79,12 @@ const router = createBrowserRouter(
 function App() {
   return (
     <>
-      <BookStoreThemeProvider>
-        <RouterProvider router={router} /> {/* 라우터 설정 */}
-        <ThemeSwitcher />
-      </BookStoreThemeProvider>
+      <QueryClientProvider client={queryClient}>
+        <BookStoreThemeProvider>
+          <RouterProvider router={router} /> {/* 라우터 설정 */}
+          <ThemeSwitcher />
+        </BookStoreThemeProvider>
+      </QueryClientProvider>
     </>
   );
 }
