@@ -1,14 +1,14 @@
+import { useAuth } from '@/hooks/useAuth';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
-import { login } from '../api/auth.api';
 import Button from '../components/common/Button';
 import InputText from '../components/common/InputText';
 import Title from '../components/common/Title';
 import { useAlert } from '../hooks/useAlert';
 import { useAuthStore } from '../store/authStore';
 
-export interface SignupProps {
+export interface LoginProps {
   email: string;
   password: string;
 }
@@ -18,28 +18,17 @@ const Login = () => {
   const { showAlert } = useAlert();
 
   const { isLoggedIn, storeLogin, stotreLogout } = useAuthStore();
+  const { userLogin } = useAuth();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<SignupProps>();
+  } = useForm<LoginProps>();
 
-  const onSubmit = (data: SignupProps) => {
+  const onSubmit = (data: LoginProps) => {
     console.log(data);
-    login(data)
-      .then((res) => {
-        console.log('res: ', res);
-        // 상태 변화
-        storeLogin(res.token);
-        showAlert('로그인이 완료되었습니다.');
-        navigate('/');
-      })
-      // 에러 처리: 서버에서 전달한 에러 메시지를 출력
-      .catch((err) => {
-        console.log('err: ', err);
-        showAlert('로그인에 실패했습니다.');
-      });
+    userLogin(data);
   };
 
   return (

@@ -1,11 +1,10 @@
+import { useAuth } from '@/hooks/useAuth';
 import { useForm } from 'react-hook-form';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { styled } from 'styled-components';
-import { signup } from '../api/auth.api';
 import Button from '../components/common/Button';
 import InputText from '../components/common/InputText';
 import Title from '../components/common/Title';
-import { useAlert } from '../hooks/useAlert';
 
 export interface SignupProps {
   email: string;
@@ -24,8 +23,7 @@ const Signup = () => {
   //   console.log(email, password);
   // };
 
-  const navigate = useNavigate(); // useNavigate 훅을 사용하여 페이지 이동을 위한 함수를 가져옴
-  const { showAlert } = useAlert(); // useAlert 훅을 사용하여 alert 함수를 가져옴
+  const { userSignup } = useAuth(); // useAuth 훅을 사용하여 userSignup 함수를 가져옴
 
   const {
     register, // input 요소를 등록하기 위한 함수
@@ -37,17 +35,7 @@ const Signup = () => {
   // onSubmit 함수 : form 요소의 submit 이벤트를 처리하는 함수
   const onSubmit = (data: SignupProps) => {
     console.log(data);
-    signup(data)
-      .then((res) => {
-        console.log('res: ', res);
-        // alert('회원가입이 완료되었습니다.');
-        navigate('/login');
-      })
-      .catch((error) => {
-        console.log('error: ', error);
-        console.log(error.response.data); // error.response.data: 서버에서 전달한 에러 메시지
-        showAlert(`회원가입에 실패했습니다.`);
-      });
+    userSignup(data);
   };
 
   return (

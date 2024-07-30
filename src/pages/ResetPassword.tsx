@@ -1,12 +1,10 @@
-import { useState } from 'react';
+import { useAuth } from '@/hooks/useAuth';
 import { useForm } from 'react-hook-form';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { styled } from 'styled-components';
-import { resetPassword, resetRequest } from '../api/auth.api';
 import Button from '../components/common/Button';
 import InputText from '../components/common/InputText';
 import Title from '../components/common/Title';
-import { useAlert } from '../hooks/useAlert';
 
 interface ResetPasswordProps {
   email: string;
@@ -14,9 +12,11 @@ interface ResetPasswordProps {
 }
 
 const ResetPassword = () => {
-  const [resetRequested, setResetRequested] = useState(false);
-  const navigator = useNavigate();
-  const { showAlert } = useAlert();
+  // const [resetRequested, setResetRequested] = useState(false);
+  // const navigator = useNavigate();
+  // const { showAlert } = useAlert();
+  const { resetRequested, userResetPassword, userResetRequest } = useAuth();
+
   const {
     register,
     handleSubmit,
@@ -25,21 +25,10 @@ const ResetPassword = () => {
 
   // onSubmit 함수 : form 요소의 submit 이벤트를 처리하는 함수
   const onSubmit = (data: ResetPasswordProps) => {
-    if (resetRequested) {
-      // 초기화 함수 호출
-      resetPassword(data).then((res) => {
-        console.log(res);
-        showAlert('비밀번호가 초기화되었습니다.');
-        navigator('/login');
-      });
-    } else {
-      // 요청
-      resetRequest(data).then((res) => {
-        console.log(res);
-        setResetRequested(true);
-      });
-    }
+    if (resetRequested) userResetPassword(data); // 초기화 함수 호출
+    else userResetRequest(data); // 요청
   };
+
   return (
     <>
       <Title size='large'>비밀번호 초기화</Title>
