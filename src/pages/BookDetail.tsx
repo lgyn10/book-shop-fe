@@ -39,7 +39,7 @@ const bookInfoList = [
 
 const BookDetail = () => {
   const { bookId } = useParams(); // URL 파라미터에서 bookId 추출
-  const { book, likeToggle, reviews } = useBook(bookId); // useBook 훅을 사용하여 book 정보 가져오기
+  const { book, likeToggle, reviews, addReview } = useBook(bookId); // useBook 훅을 사용하여 book 정보 가져오기
 
   // console.log('book:', book);
   //! Early return: book이 없으면 null 반환
@@ -79,7 +79,7 @@ const BookDetail = () => {
         <Title size={'medium'}>목차</Title>
         <p className='index'>{book.contents}</p>
         <Title size={'medium'}>리뷰</Title>
-        <BookReview reviews={reviews} />
+        <BookReview reviews={reviews} onAdd={addReview} />
       </div>
     </StyledBookDetail>
   );

@@ -27,3 +27,5 @@ export interface BookReviewItem {
   createdAt: string;
   score: number;
 }
+
+export type BookReviewItemWirte = Pick<BookReviewItem, 'content' | 'score'>;
