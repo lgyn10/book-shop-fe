@@ -18,6 +18,7 @@ h1{
 
 * {
   color: ${(props) => (props.themeName === 'light' ? 'gray' : 'white')};
-  border: none
+  border: none;
+  font-family: "Pretendard";
 }
 `;
