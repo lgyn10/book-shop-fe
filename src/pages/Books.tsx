@@ -1,5 +1,6 @@
 import { styled } from 'styled-components';
 
+import Loading from '@/components/common/Loading';
 import BookEmpty from '../components/books/BookEmpty';
 import BooksFilter from '../components/books/BooksFilter';
 import BooksList from '../components/books/BooksList';
@@ -13,6 +14,15 @@ const Books = () => {
   // console.log(books); // 책 목록
   // console.log(pagination); // 페이징 정보
 
+  if (isEmpty) {
+    return <BookEmpty />;
+  }
+
+  // books와 pagination은 null로 리턴될 수 있음
+  if (!books || !pagination || isBooksLoading) {
+    return <Loading />;
+  }
+
   console.log('isBooksLoading:', isBooksLoading); // 데이터를 가져오는 중인지 확인
   return (
     <>
@@ -22,9 +32,8 @@ const Books = () => {
           <BooksFilter />
           <BooksViewSwitcher />
         </div>
-        {!isEmpty && books && <BooksList books={books} />}
-        {isEmpty && <BookEmpty />}
-        {!isEmpty && pagination && <Pagination pagination={pagination} />}
+        <BooksList books={books} />
+        <Pagination pagination={pagination} />
       </StyledBooks>
     </>
   );
