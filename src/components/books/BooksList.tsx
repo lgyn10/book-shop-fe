@@ -1,10 +1,10 @@
+import { ViewMode } from '@/components/books/BooksViewSwitcher';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { styled } from 'styled-components';
 import { QUERYSTRING } from '../../constants/querystring';
 import { Book } from '../../models/book.model';
 import BookItem from './BookItem';
-import { ViewMode } from './BooksViewSwitcher';
 
 // const dummyBook = { id: 1, title: 'Dummy Book', img: 5, category_id: 1, summary: 'This is a dummy book', author: 'John Doe', price: 12000, likes: 10, form: 'paperback', isbn: 'Dummy isbn', detail: 'Lorem ipsumh dolor sit amet, consectetur adipiscing elit.', pages: 200, contents: 'Dummy contents', pubDate: '2022-01-01' };
 

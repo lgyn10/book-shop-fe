@@ -29,9 +29,9 @@
     "zustand": "^4.5.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
     "eject": "react-scripts eject",
     "typecheck": "tsc --noEmit --skipLibCheck"
   },
@@ -53,5 +53,9 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:8888"
+  "proxy": "http://localhost:8888",
+  "devDependencies": {
+    "@craco/craco": "^7.1.0",
+    "craco-alias": "^3.0.1"
+  }
 }
