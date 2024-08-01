@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { styled } from 'styled-components';
 
 interface IDropDownProps {
@@ -9,8 +9,30 @@ interface IDropDownProps {
 
 const DropDown = ({ children, toggleButton, isOpen = false }: IDropDownProps) => {
   const [open, setOpen] = useState(isOpen);
+
+  //! useRef를 사용하여 패널 외부를 클릭하면 닫히도록 구현
+  const dropDownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleOutsideClick(event: MouseEvent) {
+      // console.log(dropDownRef);
+      // console.log(dropDownRef.current);
+      if (dropDownRef.current && !dropDownRef.current.contains(event.target as Node)) {
+        // 패널 외부를 클릭하면 닫힘
+        setOpen(false);
+      }
+    }
+    // add event listener
+    document.addEventListener('mousedown', handleOutsideClick);
+
+    // cleanup
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick);
+    };
+  }, [dropDownRef]);
+
   return (
-    <StyledDropDown $open={open}>
+    <StyledDropDown $open={open} ref={dropDownRef}>
       <button className='toggle' onClick={() => setOpen((prev) => !prev)}>
         {toggleButton}
       </button>
