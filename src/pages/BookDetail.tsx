@@ -1,4 +1,5 @@
 import BookReview from '@/components/bookDetail/BookReview';
+import { Tab, Tabs } from '@/components/common/Tabs';
 import { Link, useParams } from 'react-router-dom';
 import { styled } from 'styled-components';
 import AddToCart from '../components/bookDetail/AddToCart';
@@ -74,12 +75,23 @@ const BookDetail = () => {
         </div>
       </header>
       <div className='content'>
-        <Title size='medium'>상세 설명</Title>
+        <Tabs>
+          <Tab title='상세설명'>
+            <EllipsisBox linelimit={4}>{book.detail}</EllipsisBox>
+          </Tab>
+          <Tab title='목차'>
+            <p className='index'>{book.contents}</p>
+          </Tab>
+          <Tab title='리뷰'>
+            <BookReview reviews={reviews} onAdd={addReview} />
+          </Tab>
+        </Tabs>
+        {/* <Title size='medium'>상세 설명</Title>
         <EllipsisBox linelimit={4}>{book.detail}</EllipsisBox>
         <Title size={'medium'}>목차</Title>
         <p className='index'>{book.contents}</p>
         <Title size={'medium'}>리뷰</Title>
-        <BookReview reviews={reviews} onAdd={addReview} />
+        <BookReview reviews={reviews} onAdd={addReview} /> */}
       </div>
     </StyledBookDetail>
   );
