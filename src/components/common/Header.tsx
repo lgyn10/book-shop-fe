@@ -1,4 +1,5 @@
-import { FaRegUser, FaSignInAlt } from 'react-icons/fa';
+import DropDown from '@/components/common/DropDown';
+import { FaRegUser, FaSignInAlt, FaUserCircle } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import logo from '../../asset/image/logo.png';
@@ -28,30 +29,35 @@ const Header = () => {
         </ul>
       </nav>
       <nav className='auth'>
-        {isLoggedIn ? (
-          <ul>
-            <Link to={'/carts'}>장바구니</Link>
-            <Link to={'/orderlist'}>주문내역</Link>
-            <li>
-              <button onClick={stotreLogout}>로그아웃</button>
-            </li>
-          </ul>
-        ) : (
-          <ul>
-            <li>
-              <Link to='/login'>
-                <FaSignInAlt />
-                로그인
-              </Link>
-            </li>
-            <li>
-              <Link to='/signup'>
-                <FaRegUser />
-                회원가입
-              </Link>
-            </li>
-          </ul>
-        )}
+        <DropDown toggleButton={<FaUserCircle />}>
+          <>
+            {isLoggedIn && (
+              <ul>
+                <Link to={'/carts'}>장바구니</Link>
+                <Link to={'/orderlist'}>주문내역</Link>
+                <li>
+                  <button onClick={stotreLogout}>로그아웃</button>
+                </li>
+              </ul>
+            )}
+            {!isLoggedIn && (
+              <ul>
+                <li>
+                  <Link to='/login'>
+                    <FaSignInAlt />
+                    로그인
+                  </Link>
+                </li>
+                <li>
+                  <Link to='/signup'>
+                    <FaRegUser />
+                    회원가입
+                  </Link>
+                </li>
+              </ul>
+            )}
+          </>
+        </DropDown>
       </nav>
     </StyledHeader>
   );
@@ -96,7 +102,9 @@ const StyledHeader = styled.header`
   .auth {
     ul {
       display: flex;
+      flex-direction: column;
       gap: 16px;
+      width: 100px;
       li {
         a,
         button {
@@ -105,6 +113,8 @@ const StyledHeader = styled.header`
           text-decoration: none;
           display: flex;
           align-items: center;
+          justify-content: center;
+          width: 100%;
           line-height: 1;
           background-color: transparent;
           border: 0;
