@@ -1,5 +1,6 @@
+import { useTimeout } from '@/components/common/toast/useTimeout';
 import useToastStore, { IToast } from '@/store/toastStore';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { FaBan, FaInfoCircle, FaPlus } from 'react-icons/fa';
 import { styled } from 'styled-components';
 
@@ -20,15 +21,16 @@ const Toast = ({ id, message, type }: IToast) => {
     }
   };
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      // 삭제
-      handleRevomeToast();
-    }, 3000);
-    return () => {
-      clearTimeout(timer);
-    };
-  }, []);
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     // 삭제
+  //     handleRevomeToast();
+  //   }, 3000);
+  //   return () => {
+  //     clearTimeout(timer);
+  //   };
+  // }, []);
+  useTimeout(handleRevomeToast, 3000);
 
   return (
     <StyledToast className={isfadingOut ? 'fade-out' : 'fade-in'} onAnimationEnd={handleAnimationEnd}>
