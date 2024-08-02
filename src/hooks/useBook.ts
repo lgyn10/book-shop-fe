@@ -1,4 +1,5 @@
 import { addBookReview, fetchBookReviews } from '@/api/review.api';
+import { useToast } from '@/hooks/useToast';
 import { useEffect, useState } from 'react';
 import { fetchBook, likeBook, unlikeBook } from '../api/books.api';
 import { addCart } from '../api/carts.api';
@@ -12,6 +13,7 @@ export const useBook = (bookId: string | undefined) => {
   const { isLoggedIn } = useAuthStore();
   const { showAlert } = useAlert();
   const [cartAdded, setCartAdded] = useState(false);
+  const { showToast } = useToast();
 
   //! 좋아요 토글
   const likeToggle = () => {
@@ -30,11 +32,13 @@ export const useBook = (bookId: string | undefined) => {
         // 성공 시, 낙관적 업데이트
         // book은 따로 fetch하지 않고, liked와 likes만 업데이트
         setBook({ ...book, liked: false, likes: book.likes - 1 });
+        showToast('좋아요를 취소했습니다.');
       });
     } else {
       // 언라이크 상태 -> 라이크
       likeBook(book.id).then(() => {
         setBook({ ...book, liked: true, likes: book.likes + 1 });
+        showToast('좋아요를 눌렀습니다.');
       });
     }
   };

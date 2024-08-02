@@ -1,4 +1,5 @@
 import { queryClient } from '@/api/queryClient';
+import ToastContainer from '@/components/common/toast/ToastContainer';
 import { QueryClientProvider } from 'react-query';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import ThemeSwitcher from './components/header/ThemeSwitcher';
@@ -83,6 +84,7 @@ function App() {
         <BookStoreThemeProvider>
           <RouterProvider router={router} /> {/* 라우터 설정 */}
           <ThemeSwitcher />
+          <ToastContainer />
         </BookStoreThemeProvider>
       </QueryClientProvider>
     </>
