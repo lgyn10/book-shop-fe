@@ -6,7 +6,7 @@ const BASE_URL = 'http://localhost:3000';
 const DEFAULT_TIMEOUT = 30000;
 
 //! createClient 함수는 axios 인스턴스를 생성하는 함수
-export const createClient = (config?: AxiosRequestConfig) => {
+export const createClient = () => {
   // axios.create: axios 라이브러리에서 제공하는 함수로, 새로운 axios 인스턴스를 생성
   // axios 인스턴스 : axios 라이브러리에서 제공하는 HTTP 요청을 보내는 객체
   const axiosInstance = axios.create({
@@ -19,7 +19,6 @@ export const createClient = (config?: AxiosRequestConfig) => {
       // Bearer: HTTP 요청 헤더에 토큰을 포함시킬 때 사용하는 방식
     },
     withCredentials: true, // 쿠키를 주고받을 수 있도록 설정
-    ...config,
   });
 
   // axiosInstance.interceptors.response.use: axios 인스턴스에서 HTTP 요청을 보내고 나서 실행되는 함수
